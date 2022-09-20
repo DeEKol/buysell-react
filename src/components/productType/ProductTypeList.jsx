@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import { Context } from '../../context/context';
 import ProductTypeService from '../../services/productType.service';
 
-const ProductTypeList = ({ elements, setElement }) => {
-  const { setObjectForm } = useContext(Context);
+const ProductTypeList = () => {
+  const { objectForm, setObjectForm,
+    elements, setElement
+  } = useContext(Context);
 
-  const deleteBtn = (id) => {
-    ProductTypeService.deleteById(id);
+  const deleteBtn = async (id) => {
+    await ProductTypeService.deleteById(id);
+
+    setElement(objectForm);
     setObjectForm({});
   }
 
@@ -19,8 +23,8 @@ const ProductTypeList = ({ elements, setElement }) => {
             name={e.name},
             description={e.description}
 
+            <button onClick={() => setObjectForm(e)}>Изменить</button>
             <button onClick={() => deleteBtn(e.id)}>Удалить</button>
-            <button onClick={() => setElement(e)}>Изменить</button>
           </li>
         )
       })}

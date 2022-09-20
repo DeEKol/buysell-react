@@ -6,15 +6,19 @@ import Navbar from './components/UI/navbar/Navbar';
 import { Context } from './context/context';
 
 function App() {
-  const [elements, setElements] = useState([]);
-  const [objectForm, setObjectForm] = useState({});
+  const [elements, setElements] = useState([]); //Массив элементов на вывод
+
+  const [element, setElement] = useState({}); //Костыль - следит за обновлением
+  const [objectForm, setObjectForm] = useState({}); //Форма ввода
 
   return (
     <Context.Provider value={{
       objectForm,
       setObjectForm,
       elements,
-      setElements
+      setElements,
+      element,
+      setElement
     }}>
       <div className="App">
         <header>

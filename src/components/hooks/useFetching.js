@@ -7,11 +7,11 @@ import { Context } from "../../context/context";
 export const useFetching = (callback) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { objectForm } = useContext(Context);
+  const { objectForm, element } = useContext(Context);
 
   useEffect(() => {
     fetch();
-  }, [objectForm]);
+  }, [element]);
 
   const fetch = async () => {
     try {
