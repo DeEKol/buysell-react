@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useFetching } from '../components/hooks/useFetching';
 import ProductTypeList from '../components/productType/ProductTypeList';
+import { Context } from '../context/context';
 import ProductTypeService from '../services/productType.service';
 
 const ProductType = () => {
-  const [elements, setElements] = useState();
-  const [productType, setProductType] = useState({ id: '', name: '', description: '' })
+  // const [elements, setElements] = useState();
+  const [element, setElement] = useState({});
+  const { objectForm, setObjectForm, elements, setElements } = useContext(Context);
+
+  // useEffect(() => {
+  //   setElement(objectForm);
+  // }, [objectForm])
 
   const [isLoading, error] = useFetching(async () => {
     const response = await ProductTypeService.getAll();
@@ -15,13 +21,13 @@ const ProductType = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (productType.id === undefined || productType.id === '') {
-      await ProductTypeService.create(productType);
+    if (element.id === undefined || element.id === '') {
+      await ProductTypeService.create(element);
     } else {
-      await ProductTypeService.updateById(productType.id, productType);
+      await ProductTypeService.updateById(element.id, element);
     }
 
-    setProductType({});
+    setObjectForm({});
   }
 
   return (
@@ -30,14 +36,14 @@ const ProductType = () => {
         <input
           type="text"
           placeholder="name"
-          value={productType.name || ''}
-          onChange={e => setProductType({...productType, name: e.target.value})}
+          value={element.name || ''}
+          onChange={e => setElement({ ...element, name: e.target.value})}
         />
         <input
           type="text"
           placeholder="description"
-          value={productType.description || ''}
-          onChange={e => setProductType({ ...productType, description: e.target.value })}
+          value={element.description || ''}
+          onChange={e => setElement({ ...element, description: e.target.value })}
         />
         <button type="submit">Add trip</button>
       </form>
@@ -52,7 +58,7 @@ const ProductType = () => {
         :
         <ProductTypeList
           elements={elements}
-          setProductType={setProductType}
+          setElement={setElement}
         />
       }
     </div>

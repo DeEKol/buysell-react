@@ -1,15 +1,17 @@
 //Хук принимает колбэк, возвращает булеон загрузку и обработанную ошибку
 //Внутри следить при загрузке получает элементы и очищает форму
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../context/context";
 
 export const useFetching = (callback) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { objectForm } = useContext(Context);
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [objectForm]);
 
   const fetch = async () => {
     try {

@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/context';
 import ProductTypeService from '../../services/productType.service';
 
-const ProductTypeList = ({ elements, setProductType }) => {
+const ProductTypeList = ({ elements, setElement }) => {
+  const { setObjectForm } = useContext(Context);
+
+  const deleteBtn = (id) => {
+    ProductTypeService.deleteById(id);
+    setObjectForm({});
+  }
+
   return (
     <ul>
       {elements?.map((e, index) => {
@@ -11,8 +19,8 @@ const ProductTypeList = ({ elements, setProductType }) => {
             name={e.name},
             description={e.description}
 
-            <button onClick={() => ProductTypeService.deleteById(e.id)}>Удалить</button>
-            <button onClick={() => setProductType(e)}>Изменить</button>
+            <button onClick={() => deleteBtn(e.id)}>Удалить</button>
+            <button onClick={() => setElement(e)}>Изменить</button>
           </li>
         )
       })}
