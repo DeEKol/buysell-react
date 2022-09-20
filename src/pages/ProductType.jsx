@@ -15,9 +15,13 @@ const ProductType = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await ProductTypeService.create(productType);
+    if (productType.id === undefined || productType.id === '') {
+      await ProductTypeService.create(productType);
+    } else {
+      await ProductTypeService.updateById(productType.id, productType);
+    }
 
-    setProductType('');
+    setProductType({});
   }
 
   return (
@@ -48,6 +52,7 @@ const ProductType = () => {
         :
         <ProductTypeList
           elements={elements}
+          setProductType={setProductType}
         />
       }
     </div>

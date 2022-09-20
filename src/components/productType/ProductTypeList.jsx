@@ -1,8 +1,7 @@
 import React from 'react';
-import ProductService from '../../services/product.service';
 import ProductTypeService from '../../services/productType.service';
 
-const ProductTypeList = ({ elements }) => {
+const ProductTypeList = ({ elements, setProductType }) => {
   return (
     <ul>
       {elements?.map((e, index) => {
@@ -13,7 +12,7 @@ const ProductTypeList = ({ elements }) => {
             description={e.description}
 
             <button onClick={() => ProductTypeService.deleteById(e.id)}>Удалить</button>
-            {/* <button onClick={() => }>Изменить</button> */}
+            <button onClick={() => setProductType(e)}>Изменить</button>
           </li>
         )
       })}
