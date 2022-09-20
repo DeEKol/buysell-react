@@ -1,19 +1,19 @@
-import api from ".api";
+import axios from "axios";
 
 const getAll = () => {
-  return api.get("/product");
+  return axios.get("https://localhost:8080/api/product");
 }
 const getOne = (id) => {
-  return api.get("/product/" + id);
+  return axios.get("/product/" + id);
 }
 const create = (object) => {
-  return api.post("/product", object);
+  return axios.post("/product", object);
 }
 const updateById = (id, object) => {
-  return api.put("/product/" + id, object);
+  return axios.put("/product/" + id, object);
 }
 const deleteById = (id) => {
-  return api.delete("/product/" + id);
+  return axios.delete("/product/" + id);
 }
 
 const ProductService = {

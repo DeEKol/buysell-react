@@ -12,7 +12,6 @@ function App() {
           <AppRouter/>
         </BrowserRouter>
       </header>
-     Hello world!!
     </div>
   );
 }

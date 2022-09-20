@@ -1,19 +1,19 @@
-import api from ".api";
+import axios from "axios";
 
-const getAll = () => {
-  return api.get("/product_type");
+const getAll = async () => {
+  return await axios.get("http://localhost:8080/api/product_type");
 }
-const getOne = (id) => {
-  return api.get("/product_type/" + id);
+const getOne = async (id) => {
+  return await axios.get("http://localhost:8080/api/product_type/" + id);
 }
-const create = (object) => {
-  return api.post("/product_type", object);
+const create = async  (object) => {
+  return await axios.post("http://localhost:8080/api/product_type", object);
 }
-const updateById = (id, object) => {
-  return api.put("/product_type/" + id, object);
+const updateById = async (id, object) => {
+  return await axios.put("http://localhost:8080/api/product_type/" + id, object);
 }
-const deleteById = (id) => {
-  return api.delete("/product_type/" + id);
+const deleteById = async (id) => {
+  return await axios.delete("http://localhost:8080/api/product_type/" + id);
 }
 
 const ProductTypeService = {
