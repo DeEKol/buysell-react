@@ -1,22 +1,22 @@
 import React, { useContext } from 'react';
 import { useFetching } from '../components/hooks/useFetching';
-import ProductTypeForm from '../components/productType/ProductTypeForm';
-import ProductTypeList from '../components/productType/ProductTypeList';
+import ProductForm from '../components/product/ProductForm';
+import ProductList from '../components/product/ProductList';
 import { Context } from '../context/context';
-import ProductTypeService from '../services/productType.service';
+import ProductService from '../services/product.service';
 
-const ProductType = () => {
+const Product = () => {
   const { setElements } = useContext(Context);
 
   const [isLoading, error] = useFetching(async () => {
-    const response = await ProductTypeService.getAll();
+    const response = await ProductService.getAll();
     setElements(response.data);
   })
 
   return (
     <div>
-      <ProductTypeForm />
-      <h2>Тип продукта</h2>
+      <ProductForm />
+      <h2>Продукты</h2>
       {
         error &&
         <h1>Произошла ошибка ${error}</h1>
@@ -25,10 +25,10 @@ const ProductType = () => {
         ?
         <h1>Загрузка</h1>
         :
-        <ProductTypeList />
+        <ProductList />
       }
     </div>
   )
 }
 
-export default ProductType;
+export default Product;

@@ -4,7 +4,7 @@ import ProductTypeService from '../../services/productType.service';
 import { useSubmitForm } from '../hooks/useSubmitForm';
 
 const ProductTypeForm = () => {
-  const { objectForm, setObjectForm, setElement } = useContext(Context);
+  const { objectForm, setObjectForm } = useContext(Context);
 
   const submitHandler = useSubmitForm(ProductTypeService);
 
@@ -22,7 +22,7 @@ const ProductTypeForm = () => {
         value={objectForm.description || ''}
         onChange={e => setObjectForm({ ...objectForm, description: e.target.value })}
       />
-      <button type="submit">Add trip</button>
+      <button type="submit">Add</button>
     </form>
   )
 }
